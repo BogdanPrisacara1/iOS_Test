@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  iOS_Test
 //
 //  Created by Zumzet Mobile on 01/03/2018.
@@ -8,11 +8,21 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
 
+    var usersList = Array<User>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // Do any additional setup after loading the view.
+        
+        RestApiManager.sharedInstance.getUsers(){(result) in
+            
+            if let nnResult = result{
+                self.usersList = nnResult
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,4 +32,3 @@ class ViewController: UIViewController {
 
 
 }
-
