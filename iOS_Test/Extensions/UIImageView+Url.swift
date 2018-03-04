@@ -46,4 +46,22 @@ extension UIImageView {
             }
         }).resume()
     }
+    
+    func downloadedFrom(link: String, contentMode : UIViewContentMode) {
+        guard
+            let url = URL(string: link)
+            else {return}
+        self.contentMode = contentMode
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async { () -> Void in
+                self.image = image
+            }
+        }).resume()
+    }
 }

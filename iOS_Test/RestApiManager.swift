@@ -9,7 +9,7 @@ import UIKit
 
 class RestApiManager: NSObject {
     static let sharedInstance = RestApiManager()
-    
+
     func makeHTTPGetRequest(_ path: String,
                             inputDictionary: Dictionary<String, AnyObject>?=nil,
                             onCompletion: @escaping (Array<AnyObject>?,String?, String?) -> Void) {
@@ -66,10 +66,11 @@ class RestApiManager: NSObject {
     }
     
     
+
     func getUsers(pageNr:Int!, onCompletion: @escaping (Array<User>?) -> Void) {
         
         let baseURL = "https://randomuser.me/api?page=" + String(pageNr) + "&results=20"
-        
+       
         makeHTTPGetRequest(baseURL,
                            onCompletion: { (jsonArray, success, errorString) in
         
